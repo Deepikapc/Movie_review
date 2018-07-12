@@ -3,6 +3,8 @@
   <strong>Image:</strong>
   <%= image_tag (@movie.image.url(:medium)) , class: "img-responsive" %>
 </p>
+<div class="star-rating" data-score= <%= @avg_review %> %></div>
+<em><%= "#{@reviews.length} reviews" %></em>
 
 <p>
   <strong>Name:</strong>
@@ -24,5 +26,39 @@
   <%= @movie.rating %>
 </p>
 
+<%= link_to "Write Review", new_movie_review_path(@movie) %>
+<p>------------------------------------------------------</p>
+
+
+<div class="col-md-7 col-md-offset-1">
+  <h1 class="review_title"><%= @movie.name %>
+  <p><%= @movie.description %></p>
+  <%#= abort @review.inspect %>
+  <% if @reviews.blank? %>
+    <h3>"No  reviews has been added yet,Would you like to add the first?"</h3>
+    <%= link_to "Write Review", new_movie_review_path(@movie) %>
+  <% else %>
+   <% @reviews.each do |review| %>
+     <div class="reviews">
+      <div class="star-rating" data-score= "<%= review.rating %>" ></div>
+      <%#= review.rating %>
+      <%= review.comment %>
+     </div>
+   <% end %>
+  <% end %>
+</div>
+
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
 <%= link_to 'Back', movies_path %>
+
+<script>
+
+
+$('.star-rating').raty({
+  path: '/assets/',
+  readOnly: true,
+  score: function() {
+    return $(this).attr('data-score');
+  }
+});
+</script>

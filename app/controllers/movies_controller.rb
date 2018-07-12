@@ -6,19 +6,22 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
   def show
+    @reviews = Review.where(:movie_id =>@movie.id).order("created_at desc")
+    if @reviews.blank?
+      @avg_review = 0
+    else
+      @avg_review = @reviews.average(:rating).round(2)
+    end
   end
-
   
   def new
     #@movie = Movie.new
     @movie = current_user.movies.build
   end
 
- 
   def edit
   end
 
- 
   def create
     @movie = current_user.movies.build(movie_params)
 
