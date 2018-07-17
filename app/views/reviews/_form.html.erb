@@ -1,29 +1,61 @@
-<%= form_for ([@movie,@review]) do |f| %>
-  <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+<div class="row">
+  <div class="col-md-4 col-md-offset-1">
+    <%= form_for ([@movie,@review]) do |f| %>
+      <% if @review.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
 
-      <ul>
-      <% @review.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @review.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%#= f.label :rating %>
-    <%#= f.number_field :rating %>
-    <div id="star-rating" ></div>
+      <div id="star-rating"></div>
+
+      <div class="form-group">
+        <%= f.label :comment %>
+        <%= f.text_area :comment ,class: "form-control", onkeyup:"comment_validation();",id: "comment_id" %>
+      </div>
+      <p id="comment_error"></p>
+      <p id="char_counter"></p>
+
+      <%= f.submit class:"btn btn-primary"%>
+    <% end %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :comment %>
-    <%= f.text_area :comment %>
-  </div>
+<script>
+    $('#star-rating').raty({  
+    path: '/assets/',
+    scoreName: 'review[rating]',
+    showHalf: true
+  });    
+</script>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<script>
+function comment_validation(){
+ var max=10;
+ len =$('#comment_id').val().length
+ console.log(len);
+ if (len >= max ) {
+  console.log("hello");
+  $('#comment_error').text("You have reached the limit!");
+ } else {
+    char = max - len
+    console.log('char are' + char);
+   $('#comment_error').text(char + '' + 'characters are left!');
+ }
+}
 
+$(document).ready(function(){
+    var max = 10;
+    len =$('#comment_id').val().length
+     if ($('#comment_id').val() == 0){
+      $('#comment_error').text(max + ' ' + 'characters left');
+    } 
+  });
+
+</script>
