@@ -26,9 +26,19 @@
   <% end %>
    <!--  <p class="notice"><%= notice %></p>
    <p class="alert"><%= alert %></p> -->
-    <% flash.each do |name,msg| %>
-    	<%=  content_tag(:div,msg,class:"alert alert-info")%>
-    <% end %>
+   <div id="flash">
+      <% flash.each do |name,msg| %>
+      	<%=  content_tag(:div,msg,class:"alert alert-info")%>
+      <% end %>
+   </div>
+   <script type="text/javascript">
+    $(document).ready(function(){
+      setTimeout(function(){
+        $('#flash').remove();
+      }, 3000);
+    })
+    // window.google = {}
+</script>
     <%= yield %>
 
   </body>
