@@ -12,7 +12,9 @@ gem 'rails', '~> 5.0.7'
  gem 'sqlite3', group: :development
 group :production do 
   gem 'pg'
+  
 end 
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -43,6 +45,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'paperclip','~>4.2.0'
 gem 'will_paginate', '>= 3.1'
+
+
+gem 'activeadmin'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

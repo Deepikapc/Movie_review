@@ -14,7 +14,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
   <body>
+
     <%= render 'nav' %>
+
+  <% if user_signed_in? %>
+  	Welcome <%= current_user.email %>
+  	 <%= link_to "AccountSettings",edit_user_registration_path %> |
+  	<%= link_to "Logout",destroy_user_session_path, method: :delete %> 
+  	
+  <% else %>
+  	<%= link_to "SignIN",user_session_path %> |
+  	<%= link_to "Register",new_user_registration_path %>
+  <% end %>
+   <!--  <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p> -->
+   <div id="flash">
+      <% flash.each do |name,msg| %>
+      	<%=  content_tag(:div,msg,class:"alert alert-info")%>
+      <% end %>
+   </div>
+   <script type="text/javascript">
+    $(document).ready(function(){
+      setTimeout(function(){
+        $('#flash').remove();
+      }, 3000);
+    })
+    // window.google = {}
+</script>
     <%= yield %>
   </body>
 </html>
