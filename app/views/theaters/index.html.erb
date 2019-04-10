@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="panel panel-info">
+    <div class="panel panel-heading"> Theaters</div>
+    <div class="panel-body">
+			<%if @theaters.empty? %>
+				<p>"theater is yet to add!!"</p>
+				<% else %>
+				<table class="table table-stripped">
+					<tr>
+						<th>Name</th>
+						<th>Time</th>
+						<th>Movie</th>
+				 	</tr>
+					<% @theaters.each do |theater| %>
+						<tr>
+							<td><%= theater.name %></td>
+							<td><%= theater.time.strftime("%I:%M%p") %></td>
+							<td><%= theater.movie.name %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+			<%= link_to "Add" , new_theater_path ,class: "btn btn-success"%>
+		</div>
+	</div>
+</div>		

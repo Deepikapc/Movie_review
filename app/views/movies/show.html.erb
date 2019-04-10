@@ -1,59 +1,75 @@
-<div class="col-md-7 col-md-offset-1">
-  <p id="notice"><%= notice %></p>
-  <p>
-    <strong>Image:</strong>
-    <%= image_tag (@movie.image.url(:medium)) , class: "img-responsive" %>
-  </p>
-  <p>
-    <strong>Average Review:</strong>
-    <div class="star-rating" data-score= <%= @avg_review %> %></div>
-    <em><%= "#{@reviews.length} reviews" %></em>
-  </p>
-  <p>
-    <strong>Name:</strong>
-    <%= @movie.name %>
-  </p>
+<div class="container">
+  <div class="col-md-7">
+    <div class="panel panel-default">
+       <div class="panel-heading">Movie</div>
+        <div class="panel-body">
+        <p id="div_alert"><%= render 'show_messages' %></p>
+        <p>
+        <%#= abort @movie.theaters.inspect%>
+          <strong>Image:</strong>
+          <%= link_to (image_tag (@movie.image.url(:medium))),movie_available_theater_path(@movie),  class: "img-responsive" %>
+        </p>
+        <p>
+          <strong>Average Review:</strong>
+          <div class="star-rating" data-score= <%= @avg_review %> %></div>
+          <em><%= "#{@reviews.length} reviews" %></em>
+        </p>
+        <p>
+          <strong>Name:</strong>
+          <%= @movie.name %>
+        </p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= @movie.description %>
-  </p>
+        <p>
+          <strong>Description:</strong>
+          <%= @movie.description %>
+        </p>
 
-  <p>
-    <strong>Director:</strong>
-    <%= @movie.director %>
-  </p>
+        <p>
+          <strong>Director:</strong>
+          <%= @movie.director %>
+        </p>
 
-  <p>
-    <strong>Rating:</strong>
-    <%= @movie.rating %>
-  </p>
-   <%= link_to 'Edit', edit_movie_path(@movie) %> |
-   <%= link_to 'Back', movies_path %>
-  
-</div>
+        <p>
+          <strong>AvailableDate:</strong>
+          <%= @movie.available_date %>
+        </p>
 
-<div class="row"
-  <div class="col-md-4 col-md-offset-1">
-    <h1 class="review_title"><%= @movie.name %></h1>
-    <p><%= @movie.description %></p>
-    <%#= abort @review.inspect %>
-    <% if @reviews.blank? %>
-      <h3>"No  reviews has been added yet,Would you like to add the first?"</h3>
-      <%= link_to "Write Review", new_movie_review_path(@movie) %>
-    <% else %>
-     <% @reviews.each do |review| %>
-       <div class="reviews">
-        <div class="star-rating" data-score= "<%= review.rating %>" ></div>
-        <%#= review.rating %>
-        <%= review.comment %>
-       </div>
-     <% end %>
-    <% end %>
-    <%= link_to "Write Review", new_movie_review_path(@movie) ,class:"btn btn-primary"%>
+        <p>
+          <strong>AvailableTime:</strong>
+          <%= @movie.available_time %>
+        </p>
+       
+        <%= link_to 'Edit', edit_movie_path(@movie) ,class: "btn btn-info btn-con"%> 
+        <%= link_to 'Cancel', movies_path,class: "btn btn-danger btn-con" %>
+        <button type="button" class="btn btn-primary">BookTickets</button>
+      </div>  
+    </div>  
   </div>
-</div>
 
+  
+  <div class="col-md-5">
+    <div class="panel panel-default">
+       <div class="panel-heading">Review</div>
+      <div class="panel-body">
+        <h1 class="review_title"><%= @movie.name %></h1>
+        <p><%= @movie.description %></p>
+          <% if @reviews.blank? %>
+            <h3>No  reviews has been added yet,Would you lik to add the first?</h3>
+            <%#= link_to "Write Review", new_movie_review_path(@movie) %>
+          <% else %>
+            <% @reviews.each do |review| %>
+             <div class="reviews">
+                <div class="star-rating" data-score= "<%= review.rating %>" ></div>
+                <%= review.comment %>
+              </div>
+            <% end %>
+          <% end %>
+          <%= link_to "Write Review", new_movie_review_path(@movie) ,class:"btn btn-success btn-cons"%>    
+        </div>
+      </div> 
+     </div> 
+  </div>  
+</div>  
 <script>
     //Reading stars while showing specific movie
   $('.star-rating').raty({

@@ -1,0 +1,62 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align: left">
+        <h5 class="modal-title" id="exampleModalLongTitle">How Many Seats?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: left">
+	      <div class="_list" >
+	      	<ul id="popQty" class="_list">
+						<li id="pop_1">1</li>
+						<li id="pop_2" class="_active">2</li>
+						<li id="pop_3">3</li>
+						<li id="pop_4">4</li>
+						<li id="pop_5">5</li>
+						<li id="pop_6">6</li>
+						<li id="pop_7">7</li>
+						<li id="pop_8">8</li>
+						<li id="pop_9">9</li>
+						<li id="pop_10">10</li>
+					</ul>
+	      </div> 
+      </div>
+      <div class="modal-footer">
+       <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary">Select Seats</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2nd modal end -->
+
+<script>
+$('#document').ready(function(){
+	 listItems = document.querySelectorAll('._list li');
+	console.log(listItems)
+	for ( i = 0; i < listItems.length; i++) {
+  	//alert (listItems[i].textContent);
+	}
+})
+// })
+
+// var originalColor = $('div').css('background-color');
+// var hoverColor;
+
+// $('div').hover(function() {
+//     if( !hoverColor ) {
+//         hoverColor = $(this).css('background-color');
+//         $(this).css('background-color',originalColor);
+//     }
+//     $(this).animate({backgroundColor:hoverColor});
+// });
+</script>

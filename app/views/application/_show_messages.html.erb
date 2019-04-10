@@ -1,0 +1,16 @@
+<!-- To display successfully created record message -->
+<% flash.each do |key, value| %>
+  <%#= binding.pry %>
+  <div id="div_alert" class="alert alert-<%= key %>"><%= value %>
+  </div>
+<% end %>
+
+<script>
+	setTimeout(fade_out(), 1000);
+
+	function fade_out() {
+		//alert("hello");
+	  $("#div_alert").addClass( "no-display" );
+	  console.log("after div_alert");
+	}
+</script>

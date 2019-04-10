@@ -1,0 +1,20 @@
+<%= render 'show_messages' %>
+<%= form_for @theater do |f| %>
+	<div class="form-group">
+		<%=f.label :name %>
+		<%=f.text_field :name ,class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%=f.label :time %>
+		<%=f.time_field :time ,class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%=f.label :movie_id %>
+		<%=f.collection_select :movie_id ,Movie.all,:id,:name , {prompt: "Select a Theater"},{class: "form-control"} %>
+	</div>
+	<div class="form-group">
+		<%=f.submit class: "btn btn-success" %>
+		<%=link_to "Back",theaters_path, class: "btn btn-danger" %>
+	</div>
+
+<% end %>

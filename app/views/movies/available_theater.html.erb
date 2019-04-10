@@ -1,0 +1,59 @@
+<h2>Available Theaters</h2>
+<div class="">
+<% if @theaters.empty? %>
+	<p>"Theaters are not available for the selected movie"</p>
+	<% else %>
+	<table class="table table-stripped">
+		<tr>
+			<th>Name</th>
+			<th>Time</th>
+			<th>Movie</th>
+		</tr>
+		<tbody>
+			<% @theaters.each do |therater|%>
+				<tr>
+					<td><%= therater.name %></td>
+					<!-- Button trigger modal -->
+					<td><button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#exampleModalCenter"><%= therater.time.strftime("%I:%M%p") %></button></td>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLongTitle">Terms & Conditions</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        1. Entry is allowed only for valid ticket holders.<br/>  
+									2. Please carry age proof for movies certified `A`. <br/> 
+									3. Children above the age of 3 years require tickets.<br/> 
+									5. Tickets once purchased cannot be cancelled, exchanged or refunded.<br/>
+									6. Outside food and beverages are not allowed inside the cinema premises. <br/> 
+									7. Decision(s) taken by INOX shall be final and binding. <br/> 
+									8. Rights of admission reserved by INOX Management.
+					      </div>
+					      <div class="modal-footer">
+					       <!--  <button type="button" class="btn btn-primary">Accept</button> -->
+					        <%= link_to "Accept",movie_seat_selection_path,class: "btn btn-primary btn-cons" %>
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					      </div>
+					    </div>
+					  </div>
+					</div><!-- 1st modal end -->
+
+					
+					
+					<td><%= therater.movie.name %></td>
+				<td><%= link_to "Back",movie_path(therater.movie_id)%></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+</div>
+
+
+

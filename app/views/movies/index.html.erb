@@ -1,35 +1,63 @@
-<p id="notice"><%= notice %></p>
+<%#= will_paginate @movies %>
+<div class="container">
+  <div class="panel panel-info">
+    <div class="panel panel-heading"> Movies</div>
+    <div class="panel-body">
+      <div class="search">
+        <span class="fa fa-search"></span>
+        Search:<input type="text" name="search" id="movie_search" placeholder="Search movies"> 
+      </div>
+        <table class="table table-stripe" id="myTable">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Director</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+           <% @movies.each do |movie| %>
+            <tr>
+              <td><%= image_tag(movie.image.url(:medium)) %></td>
+              <td><%= movie.name %></td>
+              <td><%= movie.description %></td>
+              <td><%= movie.director %></td>
 
-<h1>Movies</h1>
+              <td><%= link_to  movie ,class: " btn btn-success btn-cons btn-xs" do %>
+                <i class="glyphicon glyphicon-eye-open"></i>Show
+              </td>
+              <% end %>
+              <td><%= link_to edit_movie_path(movie) ,class: " btn btn-info  btn-cons btn-xs" do %>
+                <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>Edit
+              </td>
+              <% end %>
+              <td><%= link_to  movie, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-warning btn-cons btn-xs" do %>
+                <i class="glyphicon glyphicon-trash"></i>Destroy
+              </td>  
+              <% end %>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <br>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Director</th>
-      <th>Rating</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <%= link_to 'New Movie', new_movie_path ,class: "btn btn-success btn-cons"%>
+    </div>  
+  </div>  
+</div>  
+<%= will_paginate @movies %>
+<script>
+  $('#movie_search').on("keyup",function(){
+    var text = $('#movie_search').val().toLowerCase();
+    var data = ('<%= @movies.to_json %>');
+    //console.log(text);
+    //console.log("data iss====>" + typeof(data));
 
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= image_tag(movie.image.url(:medium)) %></td>
-        <td><%= movie.name %></td>
-        <td><%= movie.description %></td>
-        <td><%= movie.director %></td>
-        <td><%= movie.rating %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Movie', new_movie_path %>
+   $("#myTable td").filter(function() {
+    console.log("deepika");
+      $(this).toggle($(this).text().toLowerCase().indexOf(text) > -1)
+    });
+  });
+</script>

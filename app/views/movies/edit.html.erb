@@ -1,6 +1,12 @@
-<h1>Editing Movie</h1>
+<div class="container">
+	<div class="panel panel-info">
+		<div class="panel-heading">Editing Movie</div>
+			<div class="panel-body">
+				<%= render 'form', movie: @movie %>
 
-<%= render 'form', movie: @movie %>
-
-<%= link_to 'Show', @movie %> |
-<%= link_to 'Back', movies_path %>
+				<%#= link_to 'Show', @movie %> 
+				<%= link_to 'Cancel', movies_path , class: "btn btn-danger btn-cons" %>
+			</div>	
+		</div>	
+	</div>	
+</div>	

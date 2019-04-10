@@ -4,6 +4,7 @@ class MoviesController < ApplicationController
  
   def index
     @movies = Movie.all
+    @movies = @movies.paginate(page: params[:page], per_page: 2)
   end
   def show
     @reviews = Review.where(:movie_id =>@movie.id).order("created_at desc")
@@ -27,7 +28,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
+        format.html { redirect_to @movie, success: 'Movie was successfully created.' }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new }
@@ -55,7 +56,15 @@ class MoviesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #custom method
+  def available_theater
+    @theaters=Theater.all
+  end
 
+  def seat_selection
+
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
@@ -64,6 +73,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:name, :description, :director, :rating,:image)
+      params.require(:movie).permit(:name, :description, :director, :rating,:image,:available_date,:available_time)
     end
 end

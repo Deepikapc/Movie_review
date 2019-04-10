@@ -1,8 +1,8 @@
+<%= render 'show_messages' %>
 <%= form_for movie,html: {multipart: true} do |f| %>
   <% if movie.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
-
       <ul>
       <% movie.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,30 +11,36 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name ,class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description ,class: "form-control"%>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :director %>
-    <%= f.text_field :director %>
+    <%= f.text_field :director ,class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :rating %>
-    <%= f.text_field :rating %>
+  <div class="form-group">
+    <%= f.label :available_date %>
+    <%= f.date_field :available_date ,class: "form-control" %>
   </div>
-  <div class="field">
+
+  <div class="form-group">
+    <%= f.label :available_time %>
+    <%= f.time_field :available_time ,class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :image %>
-    <%= f.file_field :image %>
+    <%= f.file_field :image ,class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit class:"btn btn-primary"%>
-  </div>
+  <div class="form-group">
+    <%= f.submit class:"btn btn-success btn-cons"%>
+  
 <% end %>
